@@ -117,10 +117,23 @@ main {
   object-fit: cover;
 }
 
+
 @keyframes avatarGlow {
-  from { box-shadow: 0 0 15px #650817; }
-  to { box-shadow: 0 0 32px #e5092b; }
+  0%, 100% {
+    box-shadow:
+      0 0 0 5px rgba(229, 9, 43, 0.08),
+      0 0 15px rgba(101, 8, 23, 0.7),
+      0 0 30px rgba(229, 9, 43, 0.2);
+  }
+
+  50% {
+    box-shadow:
+      0 0 0 7px rgba(229, 9, 43, 0.12),
+      0 0 28px rgba(229, 9, 43, 0.85),
+      0 0 55px rgba(229, 9, 43, 0.35);
+  }
 }
+
 
 h1 {
   margin: 0;
