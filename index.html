@@ -14,9 +14,7 @@
   --white: #f5eeee;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 html, body {
   margin: 0;
@@ -26,9 +24,7 @@ html, body {
   font-family: Inter, Arial, sans-serif;
 }
 
-body {
-  overflow-x: hidden;
-}
+body { overflow-x: hidden; }
 
 .background-glow {
   position: fixed;
@@ -49,8 +45,6 @@ body {
   z-index: 0;
   pointer-events: none;
 }
-
-/* CONTEÚDO */
 
 main {
   position: relative;
@@ -82,22 +76,107 @@ main {
   }
 }
 
+/* AURA ANIMADA DA FOTO */
+
+.avatar-wrap {
+  position: relative;
+  isolation: isolate;
+  width: 124px;
+  height: 124px;
+  margin: 0 auto 20px;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  animation: avatarEnter 1s cubic-bezier(.2,.8,.2,1) .15s forwards;
+}
+
+/* Anel luminoso que gira ao redor da foto */
+.avatar-wrap::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 35deg,
+    rgba(229,9,43,.15) 65deg,
+    #ff153f 105deg,
+    #ff7890 125deg,
+    #e5092b 155deg,
+    rgba(229,9,43,.12) 205deg,
+    transparent 245deg,
+    transparent 360deg
+  );
+
+  -webkit-mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 3px),
+    #000 calc(100% - 2px)
+  );
+  mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 3px),
+    #000 calc(100% - 2px)
+  );
+
+  filter: drop-shadow(0 0 4px rgba(229,9,43,.9));
+  animation: auraSpin 4s linear infinite;
+  pointer-events: none;
+}
+
+/* Halo externo pulsante */
+.avatar-wrap::after {
+  content: "";
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    transparent 53%,
+    rgba(229,9,43,.12) 61%,
+    rgba(229,9,43,.32) 65%,
+    rgba(229,9,43,.08) 72%,
+    transparent 78%
+  );
+  z-index: -1;
+  animation: auraPulse 2.4s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes auraSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes auraPulse {
+  from {
+    transform: scale(.94);
+    opacity: .55;
+    filter: blur(1px);
+  }
+  to {
+    transform: scale(1.07);
+    opacity: 1;
+    filter: blur(3px);
+  }
+}
+
 /* FOTO */
 
 .avatar {
+  position: relative;
+  z-index: 1;
   width: 100px;
   height: 100px;
-  margin: 0 auto 20px;
-  overflow: hidden;
   border-radius: 50%;
+  overflow: hidden;
   border: 2px solid #b80b28;
-  box-shadow: 0 0 12px rgba(229,9,43,.55),
-              0 0 30px rgba(229,9,43,.22);
-
-  opacity: 0;
-  animation:
-    avatarEnter 1s cubic-bezier(.2,.8,.2,1) .15s forwards,
-    avatarGlow 2.8s ease-in-out 1.3s infinite alternate;
+  background: #100306;
+  box-shadow:
+    0 0 10px rgba(229,9,43,.65),
+    0 0 24px rgba(229,9,43,.3);
+  animation: avatarGlow 2.8s ease-in-out infinite alternate;
 }
 
 .avatar img {
@@ -127,12 +206,12 @@ main {
 
 @keyframes avatarGlow {
   from {
-    box-shadow: 0 0 9px rgba(229,9,43,.35),
-                0 0 22px rgba(229,9,43,.15);
+    box-shadow: 0 0 8px rgba(229,9,43,.4),
+                0 0 18px rgba(229,9,43,.15);
   }
   to {
-    box-shadow: 0 0 14px rgba(229,9,43,.75),
-                0 0 36px rgba(229,9,43,.35);
+    box-shadow: 0 0 14px rgba(229,9,43,.8),
+                0 0 30px rgba(229,9,43,.4);
   }
 }
 
@@ -145,7 +224,6 @@ h1 {
   padding-left: .22em;
   font-weight: 800;
   text-shadow: 0 0 12px rgba(255,255,255,.12);
-
   opacity: 0;
   animation: enterUp .8s ease .7s forwards;
 }
@@ -156,7 +234,6 @@ h1 {
   font-size: 9px;
   letter-spacing: .3em;
   text-transform: uppercase;
-
   opacity: 0;
   animation: enterUp .8s ease .9s forwards;
 }
@@ -184,15 +261,10 @@ h1 {
   text-align: left;
   overflow: hidden;
   box-shadow: 0 3px 12px rgba(0,0,0,.16);
-
   opacity: 0;
   animation: enterUp .7s ease both;
-
-  transition:
-    transform .22s ease,
-    border-color .22s ease,
-    background .22s ease,
-    box-shadow .22s ease;
+  transition: transform .22s ease, border-color .22s ease,
+              background .22s ease, box-shadow .22s ease;
 }
 
 .link:nth-child(1) { animation-delay: 1.15s; }
@@ -214,9 +286,7 @@ h1 {
   pointer-events: none;
 }
 
-.link:hover::before {
-  left: 140%;
-}
+.link:hover::before { left: 140%; }
 
 .link:hover {
   transform: translateY(-2px);
@@ -287,14 +357,11 @@ footer {
   color: #65474d;
   font-size: 9px;
   letter-spacing: .35em;
-
   opacity: 0;
   animation: enterUp .8s ease 2.2s forwards;
 }
 
-footer span {
-  color: var(--red);
-}
+footer span { color: var(--red); }
 
 /* RASTRO DO MOUSE */
 
@@ -310,8 +377,11 @@ footer span {
 /* CELULAR */
 
 @media (max-width: 480px) {
-  main {
-    padding: 30px 22px;
+  main { padding: 30px 22px; }
+
+  .avatar-wrap {
+    width: 114px;
+    height: 114px;
   }
 
   .avatar {
@@ -335,22 +405,27 @@ footer span {
     flex-basis: 36px;
   }
 
-  .label {
-    font-size: 13px;
-  }
-
-  .sub {
-    font-size: 10px;
-  }
+  .label { font-size: 13px; }
+  .sub { font-size: 10px; }
 }
 
+/* ACESSIBILIDADE */
+
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  .avatar-wrap,
+  .avatar-wrap::before,
+  .avatar-wrap::after,
+  .avatar,
+  h1,
+  .tagline,
+  .link,
+  footer {
     animation: none !important;
-    transition: none !important;
     opacity: 1 !important;
     filter: none !important;
   }
+
+  .link { transition: none !important; }
 }
 </style>
 </head>
@@ -364,8 +439,10 @@ footer span {
 <main>
 <section class="profile" aria-label="Links de WHITE">
 
-  <div class="avatar">
-    <img src="isquisitinn.png" alt="Foto de perfil">
+  <div class="avatar-wrap">
+    <div class="avatar">
+      <img src="isquisitinn.png" alt="Foto de perfil">
+    </div>
   </div>
 
   <h1>WHITE</h1>
@@ -461,7 +538,6 @@ footer span {
 
   function draw() {
     ctx.clearRect(0, 0, w, h);
-
     points.forEach(p => p.life -= .035);
     while (points.length && points[0].life <= 0) points.shift();
 
