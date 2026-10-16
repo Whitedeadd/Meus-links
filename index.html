@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#050505">
+<meta name="theme-color" content="#080203">
 <title>WHITE — Links</title>
 
 <style>
@@ -48,8 +48,16 @@ body {
   pointer-events: none;
   overflow: hidden;
   background:
-    radial-gradient(ellipse at 50% 48%, rgba(91,0,17,.28) 0%, transparent 48%),
-    radial-gradient(ellipse at 50% 0%, rgba(75,0,15,.34), transparent 65%),
+    radial-gradient(
+      ellipse at 50% 48%,
+      rgba(91, 0, 17, .28) 0%,
+      transparent 48%
+    ),
+    radial-gradient(
+      ellipse at 50% 0%,
+      rgba(75, 0, 15, .34),
+      transparent 65%
+    ),
     linear-gradient(180deg, #100306, #070203 80%);
 }
 
@@ -77,8 +85,13 @@ body {
 }
 
 @keyframes float {
-  from { transform: translate(0,0) scale(1); }
-  to { transform: translate(70px,55px) scale(1.22); }
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+
+  to {
+    transform: translate(70px, 55px) scale(1.22);
+  }
 }
 
 main {
@@ -88,27 +101,27 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 34px 18px;
+  padding: 45px 20px;
 }
 
 .profile {
-  width: min(100%, 270px);
+  width: min(100%, 380px);
   text-align: center;
   animation: appear .85s ease both;
 }
 
 .avatar {
-  width: 76px;
-  height: 76px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
-  margin: 0 auto 12px;
+  margin: 0 auto 20px;
   overflow: hidden;
   border: 2px solid #b80b28;
   box-shadow:
-    0 0 12px rgba(229,9,43,.7),
-    0 0 34px rgba(229,9,43,.42);
+    0 0 12px rgba(229, 9, 43, .7),
+    0 0 34px rgba(229, 9, 43, .42);
   animation:
-    avatarIn .95s cubic-bezier(.2,.8,.2,1) both,
+    avatarIn .95s cubic-bezier(.2, .8, .2, 1) both,
     avatarGlow 2.8s ease-in-out 1s infinite alternate;
 }
 
@@ -125,6 +138,7 @@ main {
     transform: translateY(12px) scale(.84);
     filter: blur(5px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -135,54 +149,55 @@ main {
 @keyframes avatarGlow {
   from {
     box-shadow:
-      0 0 9px rgba(229,9,43,.45),
-      0 0 22px rgba(229,9,43,.18);
+      0 0 9px rgba(229, 9, 43, .45),
+      0 0 22px rgba(229, 9, 43, .18);
   }
+
   to {
     box-shadow:
-      0 0 14px rgba(229,9,43,.8),
-      0 0 38px rgba(229,9,43,.42);
+      0 0 14px rgba(229, 9, 43, .8),
+      0 0 38px rgba(229, 9, 43, .42);
   }
 }
 
 h1 {
   margin: 0;
-  font-size: 17px;
+  font-size: clamp(24px, 5vw, 30px);
   letter-spacing: .22em;
   padding-left: .22em;
   font-weight: 800;
-  text-shadow: 0 0 12px rgba(255,255,255,.12);
+  text-shadow: 0 0 12px rgba(255, 255, 255, .12);
   animation: appear .7s ease .16s both;
 }
 
 .tagline {
-  margin: 7px 0 19px;
+  margin: 9px 0 38px;
   color: #a68b91;
-  font-size: 7px;
-  letter-spacing: .26em;
+  font-size: 9px;
+  letter-spacing: .3em;
   text-transform: uppercase;
   animation: appear .7s ease .25s both;
 }
 
 .links {
   display: grid;
-  gap: 7px;
+  gap: 12px;
 }
 
 .link {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: 13px;
   width: 100%;
-  min-height: 34px;
-  padding: 6px 9px;
-  border: 1px solid rgba(229,9,43,.23);
-  border-radius: 7px;
+  min-height: 66px;
+  padding: 12px 16px;
+  border: 1px solid rgba(229, 9, 43, .25);
+  border-radius: 14px;
   background: linear-gradient(
     110deg,
-    rgba(36,5,12,.82),
-    rgba(13,5,7,.88)
+    rgba(36, 5, 12, .88),
+    rgba(13, 5, 7, .92)
   );
   color: #e9dfe1;
   text-decoration: none;
@@ -193,71 +208,122 @@ h1 {
     border-color .22s ease,
     background .22s ease,
     box-shadow .22s ease;
-  box-shadow: 0 3px 12px rgba(0,0,0,.16);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, .16);
   animation: appear .65s ease both;
+}
+
+.link::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 80%;
+  height: 100%;
+  background: linear-gradient(
+    110deg,
+    transparent,
+    rgba(255, 255, 255, .04),
+    rgba(229, 9, 43, .09),
+    transparent
+  );
+  transform: skewX(-20deg);
+  transition: left .6s ease;
+  pointer-events: none;
+}
+
+.link:hover::before {
+  left: 140%;
 }
 
 .link:hover {
   transform: translateY(-2px);
-  border-color: rgba(229,9,43,.72);
+  border-color: rgba(229, 9, 43, .72);
   background: linear-gradient(
     110deg,
-    rgba(58,5,16,.94),
-    rgba(18,5,8,.96)
+    rgba(58, 5, 16, .94),
+    rgba(18, 5, 8, .96)
   );
-  box-shadow: 0 0 18px rgba(229,9,43,.13);
+  box-shadow: 0 0 18px rgba(229, 9, 43, .13);
 }
 
 .icon {
-  width: 16px;
-  height: 16px;
-  flex: 0 0 16px;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
   display: grid;
   place-items: center;
+  border: 1px solid rgba(229, 9, 43, .28);
+  border-radius: 11px;
+  background: rgba(229, 9, 43, .07);
   color: #e5092b;
+  transition: .25s ease;
 }
 
 .icon svg {
-  width: 14px;
-  height: 14px;
+  width: 19px;
+  height: 19px;
   display: block;
   fill: currentColor;
 }
 
+.link:hover .icon {
+  border-color: rgba(229, 9, 43, .55);
+  background: rgba(229, 9, 43, .14);
+  box-shadow: 0 0 15px rgba(229, 9, 43, .12);
+}
+
 .label {
-  font-size: 10px;
+  font-size: 14px;
   font-weight: 650;
-  line-height: 1.2;
+  line-height: 1.3;
 }
 
 .sub {
-  display: none;
+  display: block;
+  margin-top: 4px;
+  font-size: 11px;
+  color: #80535c;
+  font-weight: 400;
 }
 
 .arrow {
   margin-left: auto;
   color: #76202f;
-  font-size: 15px;
+  font-size: 22px;
   line-height: 1;
   transition: transform .22s ease, color .22s ease;
 }
 
 .link:hover .arrow {
-  transform: translateX(2px);
+  transform: translateX(3px);
   color: #f0a0ad;
 }
 
-.link:nth-child(1) { animation-delay: .32s; }
-.link:nth-child(2) { animation-delay: .42s; }
-.link:nth-child(3) { animation-delay: .52s; }
-.link:nth-child(4) { animation-delay: .62s; }
-.link:nth-child(5) { animation-delay: .72s; }
+.link:nth-child(1) {
+  animation-delay: .32s;
+}
+
+.link:nth-child(2) {
+  animation-delay: .42s;
+}
+
+.link:nth-child(3) {
+  animation-delay: .52s;
+}
+
+.link:nth-child(4) {
+  animation-delay: .62s;
+}
+
+.link:nth-child(5) {
+  animation-delay: .72s;
+}
 
 footer {
-  margin-top: 14px;
+  margin-top: 35px;
   color: #65474d;
-  font-size: 7px;
-  letter-spacing: .28em;
+  font-size: 9px;
+  letter-spacing: .35em;
   animation: appear .7s ease .95s both;
 }
 
@@ -271,6 +337,7 @@ footer span {
     transform: translateY(10px);
     filter: blur(3px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -279,9 +346,42 @@ footer span {
 }
 
 @media (max-width: 480px) {
-  main { padding: 25px 20px; }
-  .profile { width: min(100%, 270px); }
-  .avatar { width: 72px; height: 72px; }
+  main {
+    padding: 30px 22px;
+  }
+
+  .profile {
+    width: min(100%, 380px);
+  }
+
+  .avatar {
+    width: 90px;
+    height: 90px;
+  }
+
+  .tagline {
+    margin-bottom: 30px;
+    font-size: 8px;
+  }
+
+  .link {
+    min-height: 62px;
+    padding: 10px 12px;
+  }
+
+  .icon {
+    width: 36px;
+    height: 36px;
+    flex-basis: 36px;
+  }
+
+  .label {
+    font-size: 13px;
+  }
+
+  .sub {
+    font-size: 10px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -347,7 +447,9 @@ footer span {
   function draw() {
     ctx.clearRect(0, 0, w, h);
 
-    for (const p of points) p.life -= 0.035;
+    for (const p of points) {
+      p.life -= .035;
+    }
 
     while (points.length && points[0].life <= 0) {
       points.shift();
@@ -402,13 +504,15 @@ footer span {
   </div>
 
   <h1>WHITE</h1>
+
   <p class="tagline">MEUS LINKS · MINHAS REDES</p>
 
   <nav class="links">
 
     <a class="link"
        href="https://livepix.gg/whitedeadd"
-       target="_blank" rel="noopener noreferrer">
+       target="_blank"
+       rel="noopener noreferrer">
 
       <span class="icon" aria-hidden="true">
         <svg viewBox="0 0 24 24">
@@ -416,13 +520,18 @@ footer span {
         </svg>
       </span>
 
-      <span class="label">LivePix</span>
+      <span class="label">
+        LivePix
+        <span class="sub">Envie um incentivo via PIX</span>
+      </span>
+
       <span class="arrow">›</span>
     </a>
 
     <a class="link"
        href="https://www.youtube.com/@White_deaddd"
-       target="_blank" rel="noopener noreferrer">
+       target="_blank"
+       rel="noopener noreferrer">
 
       <span class="icon" aria-hidden="true">
         <svg viewBox="0 0 24 24">
@@ -430,13 +539,18 @@ footer span {
         </svg>
       </span>
 
-      <span class="label">YouTube</span>
+      <span class="label">
+        YouTube
+        <span class="sub">@White_deaddd</span>
+      </span>
+
       <span class="arrow">›</span>
     </a>
 
     <a class="link"
        href="https://discord.gg/GMtqUPGmSd"
-       target="_blank" rel="noopener noreferrer">
+       target="_blank"
+       rel="noopener noreferrer">
 
       <span class="icon" aria-hidden="true">
         <svg viewBox="0 0 24 24">
@@ -444,13 +558,18 @@ footer span {
         </svg>
       </span>
 
-      <span class="label">Discord</span>
+      <span class="label">
+        Discord
+        <span class="sub">Entre na comunidade</span>
+      </span>
+
       <span class="arrow">›</span>
     </a>
 
     <a class="link"
        href="https://www.instagram.com/white_ddead/"
-       target="_blank" rel="noopener noreferrer">
+       target="_blank"
+       rel="noopener noreferrer">
 
       <span class="icon" aria-hidden="true">
         <svg viewBox="0 0 24 24">
@@ -458,13 +577,18 @@ footer span {
         </svg>
       </span>
 
-      <span class="label">Instagram</span>
+      <span class="label">
+        Instagram
+        <span class="sub">Me acompanhe</span>
+      </span>
+
       <span class="arrow">›</span>
     </a>
 
     <a class="link"
        href="https://www.tiktok.com/@white_deadddd"
-       target="_blank" rel="noopener noreferrer">
+       target="_blank"
+       rel="noopener noreferrer">
 
       <span class="icon" aria-hidden="true">
         <svg viewBox="0 0 24 24">
@@ -472,7 +596,11 @@ footer span {
         </svg>
       </span>
 
-      <span class="label">TikTok</span>
+      <span class="label">
+        TikTok
+        <span class="sub">Clipes e novidades</span>
+      </span>
+
       <span class="arrow">›</span>
     </a>
 
@@ -488,7 +616,8 @@ footer span {
   const canvas = document.getElementById("particles");
   const ctx = canvas.getContext("2d");
 
-  let width, height, dpr, particles = [];
+  let width, height, dpr;
+  let particles = [];
 
   function resize() {
     dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -514,7 +643,9 @@ footer span {
       vx: (Math.random() - .5) * .3,
       vy: (Math.random() - .5) * .3,
       alpha: Math.random() * .65 + .2,
-      color: Math.random() > .35 ? "229,9,43" : "255,255,255"
+      color: Math.random() > .35
+        ? "229,9,43"
+        : "255,255,255"
     }));
   }
 
