@@ -48,16 +48,8 @@ body {
   pointer-events: none;
   overflow: hidden;
   background:
-    radial-gradient(
-      ellipse at 50% 48%,
-      rgba(91, 0, 17, .28) 0%,
-      transparent 48%
-    ),
-    radial-gradient(
-      ellipse at 50% 0%,
-      rgba(75, 0, 15, .34),
-      transparent 65%
-    ),
+    radial-gradient(ellipse at 50% 48%, rgba(91,0,17,.28), transparent 48%),
+    radial-gradient(ellipse at 50% 0%, rgba(75,0,15,.34), transparent 65%),
     linear-gradient(180deg, #100306, #070203 80%);
 }
 
@@ -85,14 +77,11 @@ body {
 }
 
 @keyframes float {
-  from {
-    transform: translate(0, 0) scale(1);
-  }
-
-  to {
-    transform: translate(70px, 55px) scale(1.22);
-  }
+  from { transform: translate(0,0) scale(1); }
+  to { transform: translate(70px,55px) scale(1.22); }
 }
+
+/* ENTRADA DA PÁGINA */
 
 main {
   position: relative;
@@ -107,8 +96,21 @@ main {
 .profile {
   width: min(100%, 380px);
   text-align: center;
-  animation: appear .85s ease both;
+  animation: profileEnter 1s ease both;
 }
+
+@keyframes profileEnter {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* FOTO */
 
 .avatar {
   width: 100px;
@@ -118,11 +120,11 @@ main {
   overflow: hidden;
   border: 2px solid #b80b28;
   box-shadow:
-    0 0 12px rgba(229, 9, 43, .7),
-    0 0 34px rgba(229, 9, 43, .42);
+    0 0 12px rgba(229,9,43,.7),
+    0 0 34px rgba(229,9,43,.42);
   animation:
-    avatarIn .95s cubic-bezier(.2, .8, .2, 1) both,
-    avatarGlow 2.8s ease-in-out 1s infinite alternate;
+    avatarIn 1.15s cubic-bezier(.2,.8,.2,1) both,
+    avatarGlow 2.8s ease-in-out 1.2s infinite alternate;
 }
 
 .avatar img {
@@ -133,41 +135,45 @@ main {
 }
 
 @keyframes avatarIn {
-  from {
+  0% {
     opacity: 0;
-    transform: translateY(12px) scale(.84);
-    filter: blur(5px);
+    transform: scale(.35) rotate(-12deg);
+    filter: blur(10px);
   }
-
-  to {
+  65% {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: scale(1.08) rotate(3deg);
     filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0);
   }
 }
 
 @keyframes avatarGlow {
   from {
     box-shadow:
-      0 0 9px rgba(229, 9, 43, .45),
-      0 0 22px rgba(229, 9, 43, .18);
+      0 0 9px rgba(229,9,43,.45),
+      0 0 22px rgba(229,9,43,.18);
   }
-
   to {
     box-shadow:
-      0 0 14px rgba(229, 9, 43, .8),
-      0 0 38px rgba(229, 9, 43, .42);
+      0 0 14px rgba(229,9,43,.8),
+      0 0 38px rgba(229,9,43,.42);
   }
 }
 
+/* NOME E DESCRIÇÃO */
+
 h1 {
   margin: 0;
-  font-size: clamp(24px, 5vw, 30px);
+  font-size: clamp(24px,5vw,30px);
   letter-spacing: .22em;
   padding-left: .22em;
   font-weight: 800;
-  text-shadow: 0 0 12px rgba(255, 255, 255, .12);
-  animation: appear .7s ease .16s both;
+  text-shadow: 0 0 12px rgba(255,255,255,.12);
+  animation: appear .85s cubic-bezier(.2,.8,.2,1) 0.65s both;
 }
 
 .tagline {
@@ -176,8 +182,10 @@ h1 {
   font-size: 9px;
   letter-spacing: .3em;
   text-transform: uppercase;
-  animation: appear .7s ease .25s both;
+  animation: appear .85s ease 1s both;
 }
+
+/* BOTÕES */
 
 .links {
   display: grid;
@@ -192,12 +200,12 @@ h1 {
   width: 100%;
   min-height: 66px;
   padding: 12px 16px;
-  border: 1px solid rgba(229, 9, 43, .25);
+  border: 1px solid rgba(229,9,43,.25);
   border-radius: 14px;
   background: linear-gradient(
     110deg,
-    rgba(36, 5, 12, .88),
-    rgba(13, 5, 7, .92)
+    rgba(36,5,12,.88),
+    rgba(13,5,7,.92)
   );
   color: #e9dfe1;
   text-decoration: none;
@@ -208,8 +216,9 @@ h1 {
     border-color .22s ease,
     background .22s ease,
     box-shadow .22s ease;
-  box-shadow: 0 3px 12px rgba(0, 0, 0, .16);
-  animation: appear .65s ease both;
+  box-shadow: 0 3px 12px rgba(0,0,0,.16);
+  opacity: 0;
+  animation: appear .8s cubic-bezier(.2,.8,.2,1) both;
 }
 
 .link::before {
@@ -222,8 +231,8 @@ h1 {
   background: linear-gradient(
     110deg,
     transparent,
-    rgba(255, 255, 255, .04),
-    rgba(229, 9, 43, .09),
+    rgba(255,255,255,.04),
+    rgba(229,9,43,.09),
     transparent
   );
   transform: skewX(-20deg);
@@ -237,14 +246,22 @@ h1 {
 
 .link:hover {
   transform: translateY(-2px);
-  border-color: rgba(229, 9, 43, .72);
+  border-color: rgba(229,9,43,.72);
   background: linear-gradient(
     110deg,
-    rgba(58, 5, 16, .94),
-    rgba(18, 5, 8, .96)
+    rgba(58,5,16,.94),
+    rgba(18,5,8,.96)
   );
-  box-shadow: 0 0 18px rgba(229, 9, 43, .13);
+  box-shadow: 0 0 18px rgba(229,9,43,.13);
 }
+
+/* ENTRADA EM SEQUÊNCIA */
+
+.link:nth-child(1) { animation-delay: 1.25s; }
+.link:nth-child(2) { animation-delay: 1.42s; }
+.link:nth-child(3) { animation-delay: 1.59s; }
+.link:nth-child(4) { animation-delay: 1.76s; }
+.link:nth-child(5) { animation-delay: 1.93s; }
 
 .icon {
   width: 38px;
@@ -252,9 +269,9 @@ h1 {
   flex: 0 0 38px;
   display: grid;
   place-items: center;
-  border: 1px solid rgba(229, 9, 43, .28);
+  border: 1px solid rgba(229,9,43,.28);
   border-radius: 11px;
-  background: rgba(229, 9, 43, .07);
+  background: rgba(229,9,43,.07);
   color: #e5092b;
   transition: .25s ease;
 }
@@ -267,9 +284,9 @@ h1 {
 }
 
 .link:hover .icon {
-  border-color: rgba(229, 9, 43, .55);
-  background: rgba(229, 9, 43, .14);
-  box-shadow: 0 0 15px rgba(229, 9, 43, .12);
+  border-color: rgba(229,9,43,.55);
+  background: rgba(229,9,43,.14);
+  box-shadow: 0 0 15px rgba(229,9,43,.12);
 }
 
 .label {
@@ -299,51 +316,48 @@ h1 {
   color: #f0a0ad;
 }
 
-.link:nth-child(1) {
-  animation-delay: .32s;
-}
-
-.link:nth-child(2) {
-  animation-delay: .42s;
-}
-
-.link:nth-child(3) {
-  animation-delay: .52s;
-}
-
-.link:nth-child(4) {
-  animation-delay: .62s;
-}
-
-.link:nth-child(5) {
-  animation-delay: .72s;
-}
+/* RODAPÉ */
 
 footer {
   margin-top: 35px;
   color: #65474d;
   font-size: 9px;
   letter-spacing: .35em;
-  animation: appear .7s ease .95s both;
+  opacity: 0;
+  animation: appear .8s ease 2.2s both;
 }
 
 footer span {
   color: #e5092b;
 }
 
+/* ANIMAÇÃO GERAL */
+
 @keyframes appear {
   from {
     opacity: 0;
-    transform: translateY(10px);
-    filter: blur(3px);
+    transform: translateY(28px) scale(.96);
+    filter: blur(8px);
   }
-
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
     filter: blur(0);
   }
 }
+
+/* RASTRO DO MOUSE */
+
+#mouse-trail {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* CELULAR */
 
 @media (max-width: 480px) {
   main {
@@ -351,7 +365,7 @@ footer span {
   }
 
   .profile {
-    width: min(100%, 380px);
+    width: min(100%,380px);
   }
 
   .avatar {
@@ -388,6 +402,8 @@ footer span {
   *, *::before, *::after {
     animation: none !important;
     transition: none !important;
+    opacity: 1 !important;
+    filter: none !important;
   }
 }
 </style>
@@ -395,212 +411,73 @@ footer span {
 
 <body>
 
-<style>
-#mouse-trail {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 9999;
-}
-</style>
-
-<canvas id="mouse-trail"></canvas>
-
-<script>
-(() => {
-  const canvas = document.getElementById("mouse-trail");
-  const ctx = canvas.getContext("2d");
-
-  let w, h, dpr;
-  const points = [];
-  const isTouch = matchMedia("(pointer: coarse)").matches;
-
-  if (isTouch) {
-    canvas.remove();
-    return;
-  }
-
-  function resize() {
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
-    w = window.innerWidth;
-    h = window.innerHeight;
-
-    canvas.width = w * dpr;
-    canvas.height = h * dpr;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  }
-
-  window.addEventListener("resize", resize);
-
-  window.addEventListener("pointermove", e => {
-    points.push({
-      x: e.clientX,
-      y: e.clientY,
-      life: 1
-    });
-
-    if (points.length > 24) points.shift();
-  });
-
-  function draw() {
-    ctx.clearRect(0, 0, w, h);
-
-    for (const p of points) {
-      p.life -= .035;
-    }
-
-    while (points.length && points[0].life <= 0) {
-      points.shift();
-    }
-
-    for (let i = 1; i < points.length; i++) {
-      const a = points[i - 1];
-      const b = points[i];
-      const alpha = Math.min(a.life, b.life);
-      const progress = i / points.length;
-
-      ctx.beginPath();
-      ctx.moveTo(a.x, a.y);
-      ctx.lineTo(b.x, b.y);
-      ctx.strokeStyle = `rgba(229, 9, 43, ${alpha * progress})`;
-      ctx.lineWidth = 1 + progress * 3;
-      ctx.lineCap = "round";
-      ctx.shadowBlur = 10;
-      ctx.shadowColor = "#e5092b";
-      ctx.stroke();
-
-      ctx.beginPath();
-      ctx.arc(b.x, b.y, 1.2 + progress, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255, 255, 255, ${alpha * progress})`;
-      ctx.fill();
-    }
-
-    ctx.shadowBlur = 0;
-    requestAnimationFrame(draw);
-  }
-
-  resize();
-  draw();
-})();
-</script>
-
 <div class="background-glow" aria-hidden="true">
   <div class="glow one"></div>
   <div class="glow two"></div>
 </div>
 
 <canvas id="particles" aria-hidden="true"></canvas>
+<canvas id="mouse-trail" aria-hidden="true"></canvas>
 
 <main>
 <section class="profile" aria-label="Links de WHITE">
 
   <div class="avatar">
-    <img
-      src="isquisitinn.png"
-      alt="Foto de perfil"
-    >
+    <img src="isquisitinn.png" alt="Foto de perfil">
   </div>
 
   <h1>WHITE</h1>
-
   <p class="tagline">MEUS LINKS · MINHAS REDES</p>
 
   <nav class="links">
 
-    <a class="link"
-       href="https://livepix.gg/whitedeadd"
-       target="_blank"
-       rel="noopener noreferrer">
-
+    <a class="link" href="https://livepix.gg/whitedeadd" target="_blank" rel="noopener noreferrer">
       <span class="icon" aria-hidden="true">
         <svg viewBox="0 0 24 24">
           <path d="M12 2 3 7l9 5 9-5-9-5Zm-7 9 7 4 7-4v3l-7 4-7-4v-3Zm0 5 7 4 7-4v2l-7 4-7-4v-2Z"/>
         </svg>
       </span>
-
-      <span class="label">
-        LivePix
-        <span class="sub">Envie um incentivo via PIX</span>
-      </span>
-
+      <span class="label">LivePix<span class="sub">Envie um incentivo via PIX</span></span>
       <span class="arrow">›</span>
     </a>
 
-    <a class="link"
-       href="https://www.youtube.com/@White_deaddd"
-       target="_blank"
-       rel="noopener noreferrer">
-
+    <a class="link" href="https://www.youtube.com/@White_deaddd" target="_blank" rel="noopener noreferrer">
       <span class="icon" aria-hidden="true">
         <svg viewBox="0 0 24 24">
           <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z"/>
         </svg>
       </span>
-
-      <span class="label">
-        YouTube
-        <span class="sub">@White_deaddd</span>
-      </span>
-
+      <span class="label">YouTube<span class="sub">@White_deaddd</span></span>
       <span class="arrow">›</span>
     </a>
 
-    <a class="link"
-       href="https://discord.gg/GMtqUPGmSd"
-       target="_blank"
-       rel="noopener noreferrer">
-
+    <a class="link" href="https://discord.gg/GMtqUPGmSd" target="_blank" rel="noopener noreferrer">
       <span class="icon" aria-hidden="true">
         <svg viewBox="0 0 24 24">
           <path d="M19.7 5.1A18.5 18.5 0 0 0 15.1 3.7l-.6 1.2a17 17 0 0 0-5 0l-.6-1.2a18.5 18.5 0 0 0-4.6 1.4C1.4 9.4.6 13.6 1 17.8a18.7 18.7 0 0 0 5.7 2.9l1.2-2a12 12 0 0 1-1.9-.9l.5-.4a13.2 13.2 0 0 0 11 0l.5.4a12 12 0 0 1-1.9.9l1.2 2a18.7 18.7 0 0 0 5.7-2.9c.5-4.9-.8-9-3.3-12.7ZM8.7 14.6c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2Zm6.6 0c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2Z"/>
         </svg>
       </span>
-
-      <span class="label">
-        Discord
-        <span class="sub">Entre na comunidade</span>
-      </span>
-
+      <span class="label">Discord<span class="sub">Entre na comunidade</span></span>
       <span class="arrow">›</span>
     </a>
 
-    <a class="link"
-       href="https://www.instagram.com/white_ddead/"
-       target="_blank"
-       rel="noopener noreferrer">
-
+    <a class="link" href="https://www.instagram.com/white_ddead/" target="_blank" rel="noopener noreferrer">
       <span class="icon" aria-hidden="true">
         <svg viewBox="0 0 24 24">
           <path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2Zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.2-3.4a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4Z"/>
         </svg>
       </span>
-
-      <span class="label">
-        Instagram
-        <span class="sub">Me acompanhe</span>
-      </span>
-
+      <span class="label">Instagram<span class="sub">Me acompanhe</span></span>
       <span class="arrow">›</span>
     </a>
 
-    <a class="link"
-       href="https://www.tiktok.com/@white_deadddd"
-       target="_blank"
-       rel="noopener noreferrer">
-
+    <a class="link" href="https://www.tiktok.com/@white_deadddd" target="_blank" rel="noopener noreferrer">
       <span class="icon" aria-hidden="true">
         <svg viewBox="0 0 24 24">
           <path d="M19.6 3.1c-1.2-.8-2.1-2.1-2.4-3.1h-4.1v15.2a2.9 2.9 0 1 1-2.9-2.9c.4 0 .8.1 1.1.2V8.3c-.4-.1-.7-.1-1.1-.1A7 7 0 1 0 17.2 15V7.2a11.5 11.5 0 0 0 5.5 1.4V4.5a7.3 7.3 0 0 1-3.1-1.4Z"/>
         </svg>
       </span>
-
-      <span class="label">
-        TikTok
-        <span class="sub">Clipes e novidades</span>
-      </span>
-
+      <span class="label">TikTok<span class="sub">Clipes e novidades</span></span>
       <span class="arrow">›</span>
     </a>
 
@@ -612,12 +489,75 @@ footer span {
 </main>
 
 <script>
+/* RASTRO DO MOUSE */
+(() => {
+  const canvas = document.getElementById("mouse-trail");
+  const ctx = canvas.getContext("2d");
+  let w, h, dpr;
+  const points = [];
+
+  if (matchMedia("(pointer: coarse)").matches) {
+    canvas.remove();
+    return;
+  }
+
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = window.innerWidth;
+    h = window.innerHeight;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  window.addEventListener("resize", resize);
+
+  window.addEventListener("pointermove", e => {
+    points.push({ x: e.clientX, y: e.clientY, life: 1 });
+    if (points.length > 24) points.shift();
+  });
+
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+
+    points.forEach(p => p.life -= .035);
+    while (points.length && points[0].life <= 0) points.shift();
+
+    for (let i = 1; i < points.length; i++) {
+      const a = points[i - 1];
+      const b = points[i];
+      const alpha = Math.min(a.life, b.life);
+      const progress = i / points.length;
+
+      ctx.beginPath();
+      ctx.moveTo(a.x, a.y);
+      ctx.lineTo(b.x, b.y);
+      ctx.strokeStyle = `rgba(229,9,43,${alpha * progress})`;
+      ctx.lineWidth = 1 + progress * 3;
+      ctx.lineCap = "round";
+      ctx.shadowBlur = 10;
+      ctx.shadowColor = "#e5092b";
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.arc(b.x, b.y, 1.2 + progress, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,${alpha * progress})`;
+      ctx.fill();
+    }
+
+    ctx.shadowBlur = 0;
+    requestAnimationFrame(draw);
+  }
+
+  resize();
+  draw();
+})();
+
+/* PARTÍCULAS DO FUNDO */
 (() => {
   const canvas = document.getElementById("particles");
   const ctx = canvas.getContext("2d");
-
-  let width, height, dpr;
-  let particles = [];
+  let width, height, dpr, particles = [];
 
   function resize() {
     dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -628,13 +568,9 @@ footer span {
     canvas.height = height * dpr;
     canvas.style.width = width + "px";
     canvas.style.height = height + "px";
-
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    const count = Math.min(
-      75,
-      Math.max(30, Math.floor(width * height / 16000))
-    );
+    const count = Math.min(75, Math.max(30, Math.floor(width * height / 16000)));
 
     particles = Array.from({ length: count }, () => ({
       x: Math.random() * width,
@@ -643,9 +579,7 @@ footer span {
       vx: (Math.random() - .5) * .3,
       vy: (Math.random() - .5) * .3,
       alpha: Math.random() * .65 + .2,
-      color: Math.random() > .35
-        ? "229,9,43"
-        : "255,255,255"
+      color: Math.random() > .35 ? "229,9,43" : "255,255,255"
     }));
   }
 
@@ -654,7 +588,6 @@ footer span {
 
     for (let i = 0; i < particles.length; i++) {
       const p = particles[i];
-
       p.x += p.vx;
       p.y += p.vy;
 
@@ -678,8 +611,7 @@ footer span {
           ctx.beginPath();
           ctx.moveTo(p.x, p.y);
           ctx.lineTo(q.x, q.y);
-          ctx.strokeStyle =
-            `rgba(229,9,43,${(1 - distance / 105) * .15})`;
+          ctx.strokeStyle = `rgba(229,9,43,${(1 - distance / 105) * .15})`;
           ctx.lineWidth = .7;
           ctx.stroke();
         }
